@@ -1,0 +1,50 @@
+schema_version: 1
+
+context:
+  name: pystencils-walberla
+  version: "0.2.8"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/pystencils_walberla-${{ version }}.tar.gz
+  sha256: 966389da6cc2b134d7f5676a76dd35328d8b0ee5b0d8a6627a39cfae971204cb
+
+build:
+  number: 2
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - pip
+    - python >=3.6
+  run:
+    - jinja2
+    - pystencils
+    - python >=3.6
+
+tests:
+  - python:
+      imports:
+        - pystencils_walberla
+      pip_check: true
+
+      python_version: ${{ python_min }}.*
+about:
+  license: AGPL-3.0-or-later
+  license_file: COPYING.txt
+  summary: Formulate stencil kernels in pystencils and generate optimized C++ Code for waLBerla from it.
+  description: |
+    Formulate stencil kernels in pystencils and generate optimized C++
+    Code for waLBerla from it. Look at the waLBerla documentation on how
+    to use it.
+  homepage: https://i10git.cs.fau.de/pycodegen/pystencils_walberla
+  repository: https://i10git.cs.fau.de/pycodegen/pystencils_walberla
+  documentation: https://i10git.cs.fau.de/pycodegen/pystencils_walberla
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
